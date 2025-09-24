@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love, Our Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Define a consistent color palette and typography */
+        :root {
+            --primary-color: #A78BFA;
+            --secondary-color: #FACC15;
+            --background-dark: #1A002E;
+            --text-light: #F3E8FF;
+            --card-bg: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling for professional feel */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .script-font {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .hero-section {
+            height: 100vh;
+            background: linear-gradient(135deg, var(--background-dark) 0%, #3a065e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://placehold.co/1920x1080/A78BFA/F3E8FF?text=');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.05;
+            z-index: -1;
+            transition: transform 0.2s ease-out;
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 4rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid var(--primary-color);
+            margin-left: 2rem;
+            transition: transform 0.6s ease-out;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -12px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            border: 4px solid var(--background-dark);
+        }
+
+        .chat-bubble {
+            background-color: var(--card-bg);
+            border-radius: 1.5rem;
+            padding: 1.2rem;
+            position: relative;
+            max-width: 75%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .chat-bubble.right {
+            background-color: var(--primary-color);
+            color: var(--background-dark);
+            align-self: flex-end;
+        }
+
+        /* Glassmorphism effect for a sleek, modern look */
+        .glass-card {
+            background-color: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.37);
+            border-radius: 1rem;
+        }
+
+        .audio-player-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 9999px;
+            padding: 0.5rem 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+
+        .audio-player-container:hover {
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .gallery-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-image-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color), 0 0 45px var(--primary-color);
+        }
+
+        .countdown-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            border-radius: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: box-shadow 0.3s ease;
+        }
+        .countdown-box:hover {
+             box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color), 0 0 45px var(--primary-color);
+        }
+
+        /* Floating heart animation for a charismatic touch */
+        .heart-float {
+            position: fixed;
+            bottom: -50px;
+            left: 50%;
+            font-size: 30px;
+            color: var(--primary-color);
+            opacity: 0;
+            animation: float-up 10s ease-in infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float-up {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh) scale(1.2); opacity: 0; }
+        }
+
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fade-in {
+            animation: fade-in 1s ease-out forwards;
+        }
+
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
+
+        .favorite-card {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            height: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .favorite-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color), 0 0 45px var(--primary-color);
+        }
+
+        /* Back to top button for better user experience */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 90;
+            background-color: var(--primary-color);
+            color: var(--background-dark);
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transform: scale(0);
+            opacity: 0;
+        }
+        .back-to-top:hover {
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color), 0 0 45px var(--primary-color);
+        }
+
+        .back-to-top.visible {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Custom glowing effects for titles */
+        .glowing-text {
+            text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from {
+                text-shadow: 0 0 5px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            }
+        }
+
+        /* Custom Intersection Observer Animations for a polished feel */
+        .animated-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .animated-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .animated-slide-right {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .animated-slide-right.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animated-slide-left {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .animated-slide-left.is-visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .animated-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .animated-scale.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .message-list, .promise-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        .message-item, .promise-item {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .quiz-option {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .quiz-option:hover {
+            background-color: rgba(167, 139, 250, 0.2);
+            border-color: #A78BFA;
+        }
+
+        .quiz-option.correct {
+            background-color: rgba(34, 197, 94, 0.4);
+            border-color: #22C55E;
+        }
+
+        .quiz-option.incorrect {
+            background-color: rgba(239, 68, 68, 0.4);
+            border-color: #EF4444;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-text-light">
+
+    <!-- Fixed Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-background-dark bg-opacity-80 backdrop-blur-md shadow-lg p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a class="text-2xl font-bold script-font text-primary-color" href="#top">Our Story</a>
+            <ul class="flex space-x-4 sm:space-x-6">
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#timeline">Timeline</a></li>
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#quiz">Quiz</a></li>
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#gallery">Gallery</a></li>
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#favorites">Favorites</a></li>
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#promises">Promises</a></li>
+                <li><a class="text-text-light hover:text-primary-color transition duration-300" href="#message">Messages</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="top" class="hero-section">
+        <h1 class="text-6xl md:text-8xl font-bold script-font text-primary-color leading-tight mb-4 animate-fade-in glowing-text">Happy 4th Anniversary, My Love!</h1>
+        <p class="text-lg md:text-xl font-inter italic text-text-light opacity-80 mb-8 animate-fade-in delay-300">"Our love, a story with no end."</p>
+
+        <!-- Countdown Section -->
+        <div id="countdown-timer" class="countdown-box grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center animate-fade-in delay-600 w-11/12 max-w-2xl">
+            <div>
+                <div class="text-5xl md:text-6xl font-bold text-primary-color" id="days">00</div>
+                <div class="text-sm md:text-base text-text-light opacity-80">Days</div>
+            </div>
+            <div>
+                <div class="text-5xl md:text-6xl font-bold text-primary-color" id="hours">00</div>
+                <div class="text-sm md:text-base text-text-light opacity-80">Hours</div>
+            </div>
+            <div>
+                <div class="text-5xl md:text-6xl font-bold text-primary-color" id="minutes">00</div>
+                <div class="text-sm md:text-base text-text-light opacity-80">Minutes</div>
+            </div>
+            <div>
+                <div class="text-5xl md:text-6xl font-bold text-primary-color" id="seconds">00</div>
+                <div class="text-sm md:text-base text-text-light opacity-80">Seconds</div>
+            </div>
+        </div>
+
+        <a href="#timeline" class="scroll-down text-4xl text-primary-color hover:opacity-70 transition-opacity">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+        <div class="heart-float">❤️</div>
+    </header>
+
+    <section id="timeline" class="py-20">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 section-title animated-element glowing-text">Our Journey</h2>
+            <div class="flex flex-col items-center">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item p-6 glass-card shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 w-full md:max-w-xl animated-slide-right">
+                    <h3 class="text-2xl font-semibold mb-2">The Beginning - First Glance</h3>
+                    <p class="text-text-light opacity-80">We never thought a simple meeting would be the start of a story spanning four years. That day was the best decision I ever made.</p>
+                </div>
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item p-6 glass-card shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 w-full md:max-w-xl animated-slide-left">
+                    <h3 class="text-2xl font-semibold mb-2">First Date - Under the Moon</h3>
+                    <p class="text-text-light opacity-80">It's not unknown to both of us. All I knew that day was that I loved you so much, and I told myself that I would take care of you and love you endlessly. That night under the moon gave us promises that we will never forget.</p>
+                </div>
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item p-6 glass-card shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 w-full md:max-w-xl animated-slide-right">
+                    <h3 class="text-2xl font-semibold mb-2">Trials and Triumphs</h3>
+                    <p class="text-text-light opacity-80">We've faced many trials, but our triumphs have been even greater. We've shown each other that there is no challenge we can't overcome as long as we're together.</p>
+                </div>
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item p-6 glass-card shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 w-full md:max-w-xl animated-slide-left">
+                    <h3 class="text-2xl font-semibold mb-2">Building a Future Together</h3>
+                    <p class="text-text-light opacity-80">We are no longer just partners; we are building our future together. With every dream we fulfill, I see myself with you for the rest of my life.</p>
+                </div>
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item p-6 glass-card shadow-lg hover:shadow-xl transition-shadow duration-300 mb-8 w-full md:max-w-xl animated-slide-right">
+                    <h3 class="text-2xl font-semibold mb-2">Four Years!</h3>
+                    <p class="text-text-light opacity-80">It's our 4th year anniversary. It's amazing how time flies. Do you know that the longer we are together, the more I love you? My only wish is that in the years to come, we remain the same. You are mine. I am yours. I love you so much.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Our Story: How Well Do You Know Me?</h2>
+            <div id="quiz-container" class="glass-card mx-auto w-full md:max-w-xl p-8 animated-element">
+                <div id="quiz-start-view">
+                    <p class="text-lg mb-8">Test your knowledge about our relationship! Answer 5 questions to find out how well you know me.</p>
+                    <button id="start-quiz-btn" class="w-full bg-primary-color text-background-dark font-bold py-3 rounded-full text-lg hover:bg-secondary-color transition-colors shadow-lg">
+                        Start Quiz
+                    </button>
+                </div>
+                <div id="quiz-question-view" class="hidden text-left">
+                    <p class="text-sm text-text-light opacity-60 mb-2">Question <span id="current-question-num">1</span> of 5</p>
+                    <h3 id="question-text" class="text-2xl font-semibold mb-6"></h3>
+                    <div id="options-container" class="space-y-4">
+                        <!-- Options will be dynamically injected here -->
+                    </div>
+                </div>
+                <div id="quiz-results-view" class="hidden">
+                    <h3 class="text-3xl font-bold mb-4">Quiz Complete!</h3>
+                    <p id="quiz-score" class="text-xl mb-4"></p>
+                    <p id="quiz-feedback" class="text-lg"></p>
+                    <button id="restart-quiz-btn" class="mt-8 bg-primary-color text-background-dark font-bold py-3 rounded-full text-lg hover:bg-secondary-color transition-colors shadow-lg">
+                        Try Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quotes" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Favorite Lines From Our Story</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center md:space-x-8 space-y-8 md:space-y-0">
+                <blockquote class="bg-card-bg p-8 rounded-xl shadow-lg w-full md:w-1/3 italic text-lg text-text-light opacity-80 transition-transform duration-300 hover:scale-105 animated-element">
+                    "I don't need a lot of things. Just you is enough."
+                </blockquote>
+                <blockquote class="bg-card-bg p-8 rounded-xl shadow-lg w-full md:w-1/3 italic text-lg text-text-light opacity-80 transition-transform duration-300 hover:scale-105 animated-element" style="transition-delay: 0.2s;">
+                    "In every trial, always remember, I'm with you."
+                </blockquote>
+                <blockquote class="bg-card-bg p-8 rounded-xl shadow-lg w-full md:w-1/3 italic text-lg text-text-light opacity-80 transition-transform duration-300 hover:scale-105 animated-element" style="transition-delay: 0.4s;">
+                    "You are my dream come true."
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Our Captured Moments</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale">
+                    <img src="images/1st_bonding.jpg" alt="Our first selfie, full of excitement" class="object-cover w-full h-full">
+                </div>
+                <!-- Gallery Item 2 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.1s;">
+                    <img src="images/1st_ever.jpg" alt="Our first date, full of laughter" class="object-cover w-full h-full">
+                </div>
+                <!-- Gallery Item 3 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.2s;">
+                    <img src="images/firstmeet.jpg" alt="On our hiking date, together at the top" class="object-cover w-full h-full">
+                </div>
+                <!-- Gallery Item 4 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.3s;">
+                    <img src="images/img1.jpg" alt="Christmas 2023, our first Christmas together" class="object-cover w-full h-full">
+                </div>
+                <!-- Gallery Item 5 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.4s;">
+                    <img src="images/img2.jpg" alt="Summer trip, enjoying the beach" class="object-cover w-full h-full">
+                </div>
+                <!-- Gallery Item 6 -->
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img3.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img4.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img5.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img6.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img7.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img8.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+                <div class="gallery-image-container w-full aspect-square animated-element animated-scale" style="transition-delay: 0.5s;">
+                    <img src="images/img9.jpg" alt="Anniversary dinner, looking into each other's eyes" class="object-cover w-full h-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="favorites" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Our Favorites</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Favorites Card 1: My Favorites of You -->
+                <div class="favorite-card text-left glass-card animated-element animated-slide-left">
+                    <h3 class="text-3xl font-bold text-primary-color mb-4">My Favorites of You</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-lg text-text-light opacity-90">
+                        <li>Your laugh that brightens my day.</li>
+                        <li>Your eyes that give me hope.</li>
+                        <li>Your loving and thoughtful nature.</li>
+                        <li>Your strength in the face of any problem.</li>
+                    </ul>
+                </div>
+                <!-- Favorites Card 2: Your Favorites of Me (Now Editable) -->
+                <div class="favorite-card text-left glass-card animated-element animated-slide-right" style="transition-delay: 0.2s;">
+                    <h3 class="text-3xl font-bold text-primary-color mb-4">Your Favorites of Me</h3>
+
+                    <!-- Editable View -->
+                    <div id="editable-favorites-view" class="space-y-4">
+                        <textarea id="my-favorites-text" rows="5" placeholder="Write your favorites here, one per line." class="w-full p-4 rounded-lg bg-background-dark text-text-light placeholder-text-light placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-primary-color transition-colors"></textarea>
+                        <button onclick="saveMyFavorites()" class="w-full bg-primary-color text-background-dark font-bold py-2 rounded-full text-sm hover:bg-secondary-color transition-colors shadow-lg">
+                            Save Favorites
+                        </button>
+                    </div>
+
+                    <!-- Display View (Initially hidden) -->
+                    <div id="display-favorites-view" class="hidden">
+                        <ul id="my-favorites-list" class="list-disc pl-5 space-y-2 text-lg text-text-light opacity-90">
+                            <!-- Favorites will be injected here by JavaScript -->
+                        </ul>
+                        <button onclick="editMyFavorites()" class="mt-4 text-sm text-primary-color hover:underline">Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="vows" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">My Promise to You</h2>
+            <div class="chat-container mx-auto space-y-8 flex flex-col items-center">
+                <div class="chat-bubble text-left w-full md:max-w-lg animated-element">
+                    <p class="font-light italic">"My love, with every year that passes, I understand the depth of our love more and more. On this 4th anniversary, I want to look back on every memory and tell you that you are the best thing that ever happened to me."</p>
+                </div>
+                <div class="chat-bubble right text-right w-full md:max-w-lg animated-element" style="transition-delay: 0.2s;">
+                    <p class="font-light italic">"No matter what trials come our way, we always find the light in the darkness. You are my safe haven, my inspiration, and the biggest reason for my smiles."</p>
+                </div>
+                <div class="chat-bubble text-left w-full md:max-w-lg animated-element" style="transition-delay: 0.4s;">
+                    <p class="font-light italic">"Before everyone, I promise you, from now until the end, **'I promise to love you and only you, from this day forward until the day death separates us.'**"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="promises" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Our Promises and Dreams</h2>
+            <div class="glass-card mx-auto w-full md:max-w-xl p-8 animated-element">
+                <form id="promise-form" class="space-y-6">
+                    <div>
+                        <textarea id="promise-text" rows="3" placeholder="Share your promises or dreams for our future." class="w-full p-4 rounded-lg bg-background-dark text-text-light placeholder-text-light placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-primary-color transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-color text-background-dark font-bold py-3 rounded-full text-lg hover:bg-secondary-color transition-colors shadow-lg">
+                        Share a Dream
+                    </button>
+                    <div id="promise-status" class="mt-4 text-center text-primary-color font-semibold hidden"></div>
+                </form>
+                <div class="promise-list-container mt-8">
+                    <h3 class="text-2xl font-bold mb-4 text-left">Shared Dreams</h3>
+                    <div id="promise-list" class="promise-list text-left">
+                        <!-- Promises will be loaded here -->
+                        <div class="text-center text-text-light opacity-60">Loading promises...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="message" class="py-20">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 section-title animated-element glowing-text">Leave a Message</h2>
+            <div class="glass-card mx-auto w-full md:max-w-xl p-8 animated-element">
+                <form id="message-form" class="space-y-6">
+                    <div>
+                        <textarea id="message-text" rows="5" placeholder="Write your message here, my Love." class="w-full p-4 rounded-lg bg-background-dark text-text-light placeholder-text-light placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-primary-color transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-color text-background-dark font-bold py-3 rounded-full text-lg hover:bg-secondary-color transition-colors shadow-lg">
+                        Send Message
+                    </button>
+                    <div id="message-status" class="mt-4 text-center text-primary-color font-semibold hidden"></div>
+                </form>
+                <div class="message-list-container mt-8">
+                    <h3 class="text-2xl font-bold mb-4 text-left">Sent Messages</h3>
+                    <div id="message-list" class="message-list text-left">
+                        <!-- Messages will be loaded here -->
+                        <div class="text-center text-text-light opacity-60">Loading messages...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Player -->
+    <div class="audio-player-container flex items-center space-x-4">
+        <!-- Insert your audio file here in the "src" attribute -->
+        <audio id="audio-player" controls src="David Pomeranz - On This Day (Official Lyric Video).mp3" class="hidden"></audio>
+        <button id="play-pause-btn" class="text-primary-color text-2xl p-2 rounded-full hover:bg-card-bg transition-colors">
+            <i class="fas fa-play" id="play-icon"></i>
+            <i class="fas fa-pause hidden" id="pause-icon"></i>
+        </button>
+        <span class="text-sm font-medium text-text-light">Play a sweet song for us.</span>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <footer class="text-center py-12 text-text-light opacity-70">
+        <p class="text-sm">Made with love for our 4th Anniversary. ❤️</p>
+    </footer>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Set Firebase debug logs for better visibility
+        setLogLevel('debug');
+
+        // Global variables for Firebase config and App ID
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        let db, auth;
+
+        // Message form elements
+        const messageForm = document.getElementById('message-form');
+        const messageTextarea = document.getElementById('message-text');
+        const messageStatus = document.getElementById('message-status');
+        const messageList = document.getElementById('message-list');
+
+        // Promise form elements
+        const promiseForm = document.getElementById('promise-form');
+        const promiseTextarea = document.getElementById('promise-text');
+        const promiseStatus = document.getElementById('promise-status');
+        const promiseList = document.getElementById('promise-list');
+
+        // Function to initialize Firebase
+        const initFirebase = async () => {
+            if (Object.keys(firebaseConfig).length === 0) {
+                console.error("Firebase config is missing. Message functionality will not work.");
+                return;
+            }
+
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+
+            // Listen for auth state changes
+            onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    console.log("User is signed in with UID:", user.uid);
+                    setupMessageListener();
+                    setupPromiseListener();
+                } else {
+                    console.log("User is not signed in.");
+                    // Sign in with custom token or anonymously if the token is not available
+                    if (initialAuthToken) {
+                        try {
+                            await signInWithCustomToken(auth, initialAuthToken);
+                        } catch (error) {
+                            console.error("Error signing in with custom token:", error);
+                            // Fallback to anonymous sign-in
+                            signInAnonymously(auth);
+                        }
+                    } else {
+                        signInAnonymously(auth);
+                    }
+                }
+            });
+
+            // Handle message form submission
+            messageForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const message = messageTextarea.value.trim();
+                const userId = auth.currentUser?.uid || 'anonymous';
+
+                if (message === '') {
+                    messageStatus.textContent = 'Please write a message first!';
+                    messageStatus.classList.remove('hidden', 'text-primary-color');
+                    messageStatus.classList.add('text-red-400');
+                    return;
+                }
+
+                messageStatus.classList.remove('hidden', 'text-red-400');
+                messageStatus.classList.add('text-primary-color');
+                messageStatus.textContent = 'Sending...';
+
+                try {
+                    // Public messages collection for a collaborative space
+                    const collectionPath = `artifacts/${appId}/public/data/anniversary_messages`;
+                    await addDoc(collection(db, collectionPath), {
+                        message: message,
+                        userId: userId,
+                        createdAt: serverTimestamp()
+                    });
+
+                    messageTextarea.value = '';
+                    messageStatus.textContent = 'Message sent!';
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                    messageStatus.textContent = 'Error: Failed to send message.';
+                    messageStatus.classList.remove('text-primary-color');
+                    messageStatus.classList.add('text-red-400');
+                }
+            });
+
+            // Handle promise form submission
+            promiseForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+                const promise = promiseTextarea.value.trim();
+                const userId = auth.currentUser?.uid || 'anonymous';
+
+                if (promise === '') {
+                    promiseStatus.textContent = 'Please write a promise or dream first!';
+                    promiseStatus.classList.remove('hidden', 'text-primary-color');
+                    promiseStatus.classList.add('text-red-400');
+                    return;
+                }
+
+                promiseStatus.classList.remove('hidden', 'text-red-400');
+                promiseStatus.classList.add('text-primary-color');
+                promiseStatus.textContent = 'Sharing...';
+
+                try {
+                    // Public promises collection for a collaborative space
+                    const collectionPath = `artifacts/${appId}/public/data/anniversary_promises`;
+                    await addDoc(collection(db, collectionPath), {
+                        promise: promise,
+                        userId: userId,
+                        createdAt: serverTimestamp()
+                    });
+
+                    promiseTextarea.value = '';
+                    promiseStatus.textContent = 'Dream shared!';
+                } catch (e) {
+                    console.error("Error adding document: ", e);
+                    promiseStatus.textContent = 'Error: Failed to share dream.';
+                    promiseStatus.classList.remove('text-primary-color');
+                    promiseStatus.classList.add('text-red-400');
+                }
+            });
+        };
+
+        // Function to listen for real-time messages
+        const setupMessageListener = () => {
+            const collectionPath = `artifacts/${appId}/public/data/anniversary_messages`;
+            const q = query(collection(db, collectionPath), orderBy("createdAt", "asc"));
+
+            onSnapshot(q, (snapshot) => {
+                messageList.innerHTML = ''; // Clear previous messages
+                if (snapshot.empty) {
+                    messageList.innerHTML = '<div class="text-center text-text-light opacity-60">No messages yet. Start writing one!</div>';
+                } else {
+                    snapshot.forEach((doc) => {
+                        const messageData = doc.data();
+                        const messageItem = document.createElement('div');
+                        messageItem.className = 'message-item';
+                        messageItem.innerHTML = `<span class="font-bold text-primary-color text-xs">[${messageData.userId}]</span><br>${messageData.message}`;
+                        messageList.appendChild(messageItem);
+                    });
+                }
+            }, (error) => {
+                console.error("Error listening to messages:", error);
+                messageList.innerHTML = '<div class="text-center text-red-400">Error loading messages.</div>';
+            });
+        };
+
+        // Function to listen for real-time promises
+        const setupPromiseListener = () => {
+            const collectionPath = `artifacts/${appId}/public/data/anniversary_promises`;
+            const q = query(collection(db, collectionPath), orderBy("createdAt", "asc"));
+
+            onSnapshot(q, (snapshot) => {
+                promiseList.innerHTML = ''; // Clear previous promises
+                if (snapshot.empty) {
+                    promiseList.innerHTML = '<div class="text-center text-text-light opacity-60">No dreams shared yet. Start sharing!</div>';
+                } else {
+                    snapshot.forEach((doc) => {
+                        const promiseData = doc.data();
+                        const promiseItem = document.createElement('div');
+                        promiseItem.className = 'promise-item';
+                        promiseItem.innerHTML = `<span class="font-bold text-primary-color text-xs">[${promiseData.userId}]</span><br>${promiseData.promise}`;
+                        promiseList.appendChild(promiseItem);
+                    });
+                }
+            }, (error) => {
+                console.error("Error listening to promises:", error);
+                promiseList.innerHTML = '<div class="text-center text-red-400">Error loading promises.</div>';
+            });
+        };
+
+        // Initialize Firebase on page load
+        initFirebase();
+    </script>
+    <script>
+        // Countdown Logic
+        const countdownDate = new Date("Dec 9, 2025 00:00:00").getTime();
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown-timer").innerHTML = `<div class="text-3xl text-primary-color font-bold">Happy Anniversary!</div>`;
+            } else {
+                document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+                document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+                document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+                document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+            }
+        }, 1000);
+
+        // Audio Player Logic
+        const audioPlayer = document.getElementById('audio-player');
+        const playPauseBtn = document.getElementById('play-pause-btn');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+
+        function togglePlayPause() {
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playIcon.classList.add('hidden');
+                pauseIcon.classList.remove('hidden');
+            } else {
+                audioPlayer.pause();
+                playIcon.classList.remove('hidden');
+                pauseIcon.classList.add('hidden');
+            }
+        }
+
+        playPauseBtn.addEventListener('click', togglePlayPause);
+
+        // Favorites Edit/Save Logic
+        function saveMyFavorites() {
+            const textarea = document.getElementById('my-favorites-text');
+            const displayList = document.getElementById('my-favorites-list');
+            const editableDiv = document.getElementById('editable-favorites-view');
+            const displayDiv = document.getElementById('display-favorites-view');
+
+            const favorites = textarea.value.split('\n').filter(item => item.trim() !== '');
+
+            displayList.innerHTML = ''; // Clear the current list
+            if (favorites.length > 0) {
+                favorites.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item.trim();
+                    displayList.appendChild(li);
+                });
+            } else {
+                 const li = document.createElement('li');
+                 li.textContent = 'No favorites listed.';
+                 displayList.appendChild(li);
+            }
+
+            editableDiv.classList.add('hidden');
+            displayDiv.classList.remove('hidden');
+        }
+
+        function editMyFavorites() {
+            const editableDiv = document.getElementById('editable-favorites-view');
+            const displayDiv = document.getElementById('display-favorites-view');
+
+            editableDiv.classList.remove('hidden');
+            displayDiv.classList.add('hidden');
+        }
+
+        // Quiz Logic
+        const quizData = [
+            {
+                question: "Where did we have our first date?",
+                options: ["At the park", "At the cinema", "At a cafe", "At the beach"],
+                answer: "At the park"
+            },
+            {
+                question: "What is our favorite food that we always eat?",
+                options: ["Pizza", "Shawarma", "Burger", "Japanese cake"],
+                answer: "Japanese cake"
+            },
+            {
+                question: "What is the date of our anniversary?",
+                options: ["December 9", "November 12", "January 23", "April 1"],
+                answer: "December 9"
+            },
+            {
+                question: "What do I always say when you're upset?",
+                options: ["I'm sorry", "Don't be upset", "I love you so much", "I give up"],
+                answer: "I love you so much"
+            },
+            {
+                question: "Where do you want to go on our next trip?",
+                options: ["Baguio", "Arayat", "Florida", "Tarlac"],
+                answer: "Florida"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const quizStartView = document.getElementById('quiz-start-view');
+        const quizQuestionView = document.getElementById('quiz-question-view');
+        const quizResultsView = document.getElementById('quiz-results-view');
+        const startQuizBtn = document.getElementById('start-quiz-btn');
+        const restartQuizBtn = document.getElementById('restart-quiz-btn');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const currentQuestionNum = document.getElementById('current-question-num');
+        const quizScore = document.getElementById('quiz-score');
+        const quizFeedback = document.getElementById('quiz-feedback');
+
+        startQuizBtn.addEventListener('click', startQuiz);
+        restartQuizBtn.addEventListener('click', startQuiz);
+
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizStartView.classList.add('hidden');
+            quizResultsView.classList.add('hidden');
+            quizQuestionView.classList.remove('hidden');
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            questionText.textContent = questionData.question;
+            currentQuestionNum.textContent = currentQuestionIndex + 1;
+            optionsContainer.innerHTML = '';
+
+            questionData.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('quiz-option', 'w-full', 'text-left');
+                button.addEventListener('click', () => checkAnswer(option));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedOption) {
+            const questionData = quizData[currentQuestionIndex];
+            const isCorrect = selectedOption === questionData.answer;
+            if (isCorrect) {
+                score++;
+            }
+
+            // Highlight options
+            Array.from(optionsContainer.children).forEach(button => {
+                button.disabled = true;
+                if (button.textContent === questionData.answer) {
+                    button.classList.add('correct');
+                } else if (button.textContent === selectedOption) {
+                    button.classList.add('incorrect');
+                }
+            });
+
+            setTimeout(() => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < quizData.length) {
+                    displayQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function showResults() {
+            quizQuestionView.classList.add('hidden');
+            quizResultsView.classList.remove('hidden');
+
+            quizScore.textContent = `You got ${score} out of ${quizData.length} correct answers!`;
+            if (score === quizData.length) {
+                quizFeedback.textContent = "Perfect! You know me so well!";
+            } else if (score > quizData.length / 2) {
+                quizFeedback.textContent = "Great job! Almost perfect!";
+            } else {
+                quizFeedback.textContent = "You've got some catching up to do, but it's okay! I love you anyway!";
+            }
+        }
+
+        // Initial setup for the favorites section on page load
+        window.onload = function() {
+            const favoritesTextarea = document.getElementById('my-favorites-text');
+            const defaultFavorites = [
+                "Your care.",
+                "Your surprises.",
+                "Your jokes."
+            ];
+            favoritesTextarea.value = defaultFavorites.join('\n');
+            saveMyFavorites(); // Populate the list on initial load
+        }
+
+        // Back to Top Button Logic
+        const backToTopBtn = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        const animatedElements = document.querySelectorAll('.animated-element, .animated-slide-right, .animated-slide-left, .animated-scale');
+        animatedElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
